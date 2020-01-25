@@ -92,6 +92,9 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                                 ]
                             ],
                         ]);
+
+                        $jsondata = JSON.parse(data);
+                        $result = $bot->replyText($event['replyToken'], $jsondata);
  
                     } else {
                     //balas pesan pakai sticker
@@ -100,6 +103,8 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     $stickerMessageBuilder = new StickerMessageBuilder($packageId, $stickerId);
                     $bot->replyMessage($replyToken, $stickerMessageBuilder);*/
                     //replySticker(replyToken, 1, 1); cara cepetnya
+
+
 
                     // send same message as reply to user
                     $result = $bot->replyText($event['replyToken'], "keyword yang anda masukan tidak sesuai, berikut adalah daftar keyword (menu, cart, buy, cancel)");
