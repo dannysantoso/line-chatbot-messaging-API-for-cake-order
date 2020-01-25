@@ -51,7 +51,8 @@
             "action": {
               "type": "postback",
               "label": "BUY",
-              "data": "BUY 01"
+              "data": "BUY01",
+              "displayText": "BUY01"
             },
             "style": "primary",
             "gravity": "center",
@@ -111,7 +112,8 @@
             "action": {
               "type": "postback",
               "label": "BUY",
-              "data": "BUY 02"
+              "data": "BUY02",
+              "displayText": "BUY02"
             },
             "style": "primary",
             "gravity": "center",
@@ -171,7 +173,8 @@
             "action": {
               "type": "postback",
               "label": "BUY",
-              "data": "BUY 03"
+              "data": "BUY03",
+              "displayText": "BUY03"
             },
             "style": "primary",
             "gravity": "center",

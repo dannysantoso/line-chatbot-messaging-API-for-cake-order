@@ -102,7 +102,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     //replySticker(replyToken, 1, 1); cara cepetnya
 
                     // send same message as reply to user
-                    $result = $bot->replyText($event['replyToken'], $event['message']['text']);
+                    $result = $bot->replyText($event['replyToken'], "keyword yang anda masukan tidak sesuai, berikut adalah daftar keyword (menu, cart, buy, cancel)");
                     
 
                     // sent different message as reply to user
