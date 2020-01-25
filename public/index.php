@@ -29,6 +29,24 @@ $app->get('/', function (Request $request, Response $response, $args) {
     $response->getBody()->write("Hello World!");
     return $response;
 });
+
+//for push message
+$app->get('/pushmessage', function ($req, $response) use ($bot) {
+    // send push message to user
+    $userId = 'U72c3603ae0f3ab5ab6e814bdeb0dee67'; //ganti dengan user id
+    $textMessageBuilder = new TextMessageBuilder('Halo, ini pesan push');
+    $result = $bot->pushMessage($userId, $textMessageBuilder);
+ 
+    $response->getBody()->write((string) $result->getJSONDecodedBody());
+    return $response
+        ->withHeader('Content-Type', 'application/json')
+        ->withStatus($result->getHTTPStatus());
+});
+
+// kalo mau pake sticker ngepush message
+/*$userId = 'Isi dengan user ID Anda';
+$stickerMessageBuilder = new StickerMessageBuilder(1, 106);
+$bot->pushMessage($userId, $stickerMessageBuilder);*/
  
 // buat route untuk webhook
 $app->post('/webhook', function (Request $request, Response $response) use ($channel_secret, $bot, $httpClient, $pass_signature) {
