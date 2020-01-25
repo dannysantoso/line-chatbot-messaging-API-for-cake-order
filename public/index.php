@@ -79,6 +79,21 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
             {
                 if($event['message']['type'] == 'text')
                 {
+                    if (strtolower($event['message']['text']) == 'flex message') {
+ 
+                        $flexTemplate = file_get_contents("../flex_message.json"); // template flex message
+                        $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
+                            'replyToken' => $event['replyToken'],
+                            'messages'   => [
+                                [
+                                    'type'     => 'flex',
+                                    'altText'  => 'Test Flex Message',
+                                    'contents' => json_decode($flexTemplate)
+                                ]
+                            ],
+                        ]);
+ 
+                    } else {
                     //balas pesan pakai sticker
                     /*packageId = 1;
                     $stickerId = 3;
@@ -138,6 +153,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     return $response
                         ->withHeader('Content-Type', 'application/json')
                         ->withStatus($result->getHTTPStatus());
+                    }
                 }
             }
         }
