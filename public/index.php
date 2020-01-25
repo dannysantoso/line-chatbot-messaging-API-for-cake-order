@@ -93,7 +93,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                             ],
                         ]);
 
-                        $result = $bot->replyText($event['replyToken'], $flexTemplate);
+                        $result = $bot->replyText($event['replyToken'], data);
  
                     } else {
                     //balas pesan pakai sticker
