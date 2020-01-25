@@ -52,6 +52,78 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
     }
     
 // kode aplikasi nanti disini
+
+    $data = json_decode($body, true);
+    if(is_array($data['events'])){
+        foreach ($data['events'] as $event)
+        {
+            if ($event['type'] == 'message')
+            {
+                if($event['message']['type'] == 'text')
+                {
+                    //balas pesan pakai sticker
+                    /*packageId = 1;
+                    $stickerId = 3;
+                    $stickerMessageBuilder = new StickerMessageBuilder($packageId, $stickerId);
+                    $bot->replyMessage($replyToken, $stickerMessageBuilder);*/
+                    //replySticker(replyToken, 1, 1); cara cepetnya
+
+                    // send same message as reply to user
+                    $result = $bot->replyText($event['replyToken'], $event['message']['text']);
+                    
+
+                    // sent different message as reply to user
+                    /*$textMessageBuilder = new TextMessageBuilder('ini pesan balasan');
+                    $bot->replyMessage($replyToken, $textMessageBuilder);*/
+                    //$bot->replyText($replyToken, 'ini pesan balasan'); cara cepetnya
+     
+     
+                    // or we can use replyMessage() instead to send reply message
+                    // $textMessageBuilder = new TextMessageBuilder($event['message']['text']);
+                    // $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
+
+                    //bales dengan multitext
+                    /*$textMessageBuilder1 = new TextMessageBuilder('ini pesan balasan pertama');
+                    $textMessageBuilder2 = new TextMessageBuilder('ini pesan balasan kedua');
+                    $stickerMessageBuilder = new StickerMessageBuilder(1, 106);
+                     
+                     
+                    $multiMessageBuilder = new MultiMessageBuilder();
+                    $multiMessageBuilder->add($textMessageBuilder1);
+                    $multiMessageBuilder->add($textMessageBuilder2);
+                    $multiMessageBuilder->add($stickerMessageBuilder);
+                     
+                     
+                    $bot->replyMessage($replyToken, $multiMessageBuilder);*/
+
+
+                    //kirim gambar
+                    /*use \LINE\LINEBot\MessageBuilder\ImageMessageBuilder;
+ 
+                    $imageMessageBuilder = new ImageMessageBuilder('url gambar asli', 'url gambar preview');
+                    $bot->replyMessage($replyToken, $imageMessageBuilder);*/
+
+                    //kirim audio
+                    /*use \LINE\LINEBot\MessageBuilder\AudioMessageBuilder;
+ 
+                    $audioMessageBuilder = new AudioMessageBuilder('url audio asli', 'durasi audio');
+                    $bot->replyMessage($replyToken, $audioMessageBuilder);*/
+
+                    //kirim video
+                    /*use \LINE\LINEBot\MessageBuilder\VideoMessageBuilder;
+ 
+                    $videoMessageBuilder = new VideoMessageBuilder('url video asli', 'url gambar preview video');
+                    $bot->replyMessage($replyToken, $videoMessageBuilder);*/
+     
+     
+                    $response->getBody()->write($result->getJSONDecodedBody());
+                    return $response
+                        ->withHeader('Content-Type', 'application/json')
+                        ->withStatus($result->getHTTPStatus());
+                }
+            }
+        }
+    }
  
 });
 $app->run();
