@@ -1,4 +1,190 @@
 {
+  "type": "carousel",
+  "contents": [
+    {
+      "type": "bubble",
+      "hero": {
+        "type": "image",
+        "url": "https://www.simplyrecipes.com/wp-content/uploads/2017/10/2017-10-28-Tiramisu-6.jpg",
+        "size": "full",
+        "aspectMode": "cover",
+        "aspectRatio": "20:13"
+      },
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "Tiramisu Cake",
+            "weight": "bold",
+            "style": "normal",
+            "align": "center",
+            "gravity": "top",
+            "size": "md",
+            "color": "#74C9D7"
+          },
+          {
+            "type": "separator",
+            "color": "#74C9D7",
+            "margin": "lg"
+          },
+          {
+            "type": "text",
+            "text": "Rp. 30.000",
+            "margin": "lg",
+            "size": "md",
+            "color": "#6699CC",
+            "style": "normal",
+            "weight": "bold",
+            "align": "center",
+            "gravity": "center"
+          }
+        ]
+      },
+      "footer": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "button",
+            "action": {
+              "type": "postback",
+              "label": "BUY",
+              "data": "BUY 01"
+            },
+            "style": "primary",
+            "gravity": "center",
+            "height": "sm",
+            "color": "#6699CC"
+          }
+        ]
+      }
+    },
+    {
+      "type": "bubble",
+      "hero": {
+        "type": "image",
+        "url": "https://i.ytimg.com/vi/ZBkQtHzInCo/maxresdefault.jpg",
+        "size": "full",
+        "aspectMode": "cover",
+        "aspectRatio": "20:13"
+      },
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "Cheese Cake",
+            "weight": "bold",
+            "style": "normal",
+            "align": "center",
+            "gravity": "top",
+            "size": "md",
+            "color": "#74C9D7"
+          },
+          {
+            "type": "separator",
+            "color": "#74C9D7",
+            "margin": "lg"
+          },
+          {
+            "type": "text",
+            "text": "Rp. 35.000",
+            "margin": "lg",
+            "size": "md",
+            "color": "#6699CC",
+            "style": "normal",
+            "weight": "bold",
+            "align": "center",
+            "gravity": "center"
+          }
+        ]
+      },
+      "footer": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "button",
+            "action": {
+              "type": "postback",
+              "label": "BUY",
+              "data": "BUY 02"
+            },
+            "style": "primary",
+            "gravity": "center",
+            "height": "sm",
+            "color": "#6699CC"
+          }
+        ]
+      }
+    },
+    {
+      "type": "bubble",
+      "hero": {
+        "type": "image",
+        "url": "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2011/10/25/1/CC_Alton-Brown-Cocoa-Brownies_s4x3.jpg.rend.hgtvcom.826.620.suffix/1371600408087.jpeg",
+        "size": "full",
+        "aspectMode": "cover",
+        "aspectRatio": "20:13"
+      },
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "Brownies Cake",
+            "weight": "bold",
+            "style": "normal",
+            "align": "center",
+            "gravity": "top",
+            "size": "md",
+            "color": "#74C9D7"
+          },
+          {
+            "type": "separator",
+            "color": "#74C9D7",
+            "margin": "lg"
+          },
+          {
+            "type": "text",
+            "text": "Rp. 45.000",
+            "margin": "lg",
+            "size": "md",
+            "color": "#6699CC",
+            "style": "normal",
+            "weight": "bold",
+            "align": "center",
+            "gravity": "center"
+          }
+        ]
+      },
+      "footer": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "button",
+            "action": {
+              "type": "postback",
+              "label": "BUY",
+              "data": "BUY 03"
+            },
+            "style": "primary",
+            "gravity": "center",
+            "height": "sm",
+            "color": "#6699CC"
+          }
+        ]
+      }
+    }
+  ]
+}
+
+/*{
   "type": "bubble",
   "header": {
     "type": "box",
@@ -71,4 +257,4 @@
       }
     ]
   }
-}
+}*/
