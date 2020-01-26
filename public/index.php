@@ -79,8 +79,15 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         ]);
  
                     } else if (strtolower($event['message']['text']) == 'cart') {
+                        
+                        include ('db.php');
 
-                        $result = $bot->replyText($event['replyToken'], "ini cart");
+                        $stmt = $pdo->query("SELECT product_name, product_price FROM cart");
+                        while ($row = $stmt->fetch()) {
+                            $details = $row['product_name'].$row['product_price'];
+                        }
+
+                        $result = $bot->replyText($event['replyToken'], $details);
 
                     } else if (strtolower($event['message']['text']) == 'buy') {
 
@@ -94,26 +101,26 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
 
                             include ('db.php');
 
-                            $sql = "INSERT INTO cart (product_name, product_price) Values ('tiramisu','Rp. 30.000')";
+                            $sql = "INSERT INTO cart (id, product_name, product_price) Values (1,'tiramisu','Rp. 30.000')";
                             $pdo->exec($sql);
-
-                            /*include ('db.php');
-
-                            $id = 1;
-                            $product_name = "tiramisu";
-                            $product_price = "Rp. 30.000";
-
-                            $sql = "INSERT INTO cart (id, product_name, product_price) VALUES (?,?,?)";
-                            $stmt= $pdo->prepare($sql);
-                            $stmt->execute([$id, $product_name, $product_price]);*/
 
                         $result = $bot->replyText($event['replyToken'], "added to cart");
 
                     }else if (strtolower($event['message']['text']) == 'buy cheesecake') {
 
+                            include ('db.php');
+
+                            $sql = "INSERT INTO cart (id, product_name, product_price) Values (1,'cheesecake','Rp. 35.000')";
+                            $pdo->exec($sql);
+
                         $result = $bot->replyText($event['replyToken'], "added to cart");
 
                     }else if (strtolower($event['message']['text']) == 'buy brownies') {
+
+                            include ('db.php');
+
+                            $sql = "INSERT INTO cart (id, product_name, product_price) Values (1,'brownies','Rp. 45.000')";
+                            $pdo->exec($sql);
 
                         $result = $bot->replyText($event['replyToken'], "added to cart");
 
