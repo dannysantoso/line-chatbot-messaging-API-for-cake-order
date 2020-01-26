@@ -87,9 +87,14 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         $q = $pdo->query($sql);
                         $q->setFetchMode(PDO::FETCH_ASSOC);
 
+                        $details = "Cart : \n";
+
                         while ($r = $q->fetch()){
-                            $details .= "product name = ".$r['product_name']." product price = ".$r['product_price']."\n";
+                            $details .= "name = ".$r['product_name'].", price = ".$r['product_price']."\n";
+                            $sum .= $r['product_price'];
                         }
+
+                        $details .= "total :".$sum;
 
                         $result = $bot->replyText($event['replyToken'], $details);
 
@@ -105,7 +110,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
 
                             include ('db.php');
 
-                            $sql = "INSERT INTO cart (id, product_name, product_price) Values (1,'tiramisu','Rp. 30.000')";
+                            $sql = "INSERT INTO cart (id, product_name, product_price) Values (1,'tiramisu',30000)";
                             $pdo->exec($sql);
 
                         $result = $bot->replyText($event['replyToken'], "added to cart");
@@ -114,7 +119,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
 
                             include ('db.php');
 
-                            $sql = "INSERT INTO cart (id, product_name, product_price) Values (1,'cheesecake','Rp. 35.000')";
+                            $sql = "INSERT INTO cart (id, product_name, product_price) Values (1,'cheesecake',35000)";
                             $pdo->exec($sql);
 
                         $result = $bot->replyText($event['replyToken'], "added to cart");
@@ -123,7 +128,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
 
                             include ('db.php');
 
-                            $sql = "INSERT INTO cart (id, product_name, product_price) Values (1,'brownies','Rp. 45.000')";
+                            $sql = "INSERT INTO cart (id, product_name, product_price) Values (1,'brownies',45000)";
                             $pdo->exec($sql);
 
                         $result = $bot->replyText($event['replyToken'], "added to cart");
