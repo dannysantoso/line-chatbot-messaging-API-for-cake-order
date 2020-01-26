@@ -96,7 +96,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
 
                         $details .= "total :".$sum;
 
-                        $result = $bot->replyText($event['replyToken'], $details);
+                        /*$result = $bot->replyText($event['replyToken'], $details);*/
 
                         $textMessageBuilder1 = new TextMessageBuilder($details);
                         $textMessageBuilder2 = new TextMessageBuilder('ketik keyword "buy" untuk melakukan pembelian, dan "cancel" untuk mengcancel pemesanan');
@@ -134,7 +134,17 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                             $sql = "INSERT INTO cart (id, product_name, product_price) Values (1,'tiramisu',30000)";
                             $pdo->exec($sql);
 
-                        $result = $bot->replyText($event['replyToken'], "added to cart");
+
+                        $textMessageBuilder1 = new TextMessageBuilder("added to cart");
+                        $textMessageBuilder2 = new TextMessageBuilder('ketik keyword "cart" untuk melihat pemesanan anda');
+
+                        $multiMessageBuilder = new MultiMessageBuilder();
+                        $multiMessageBuilder->add($textMessageBuilder1);
+                        $multiMessageBuilder->add($textMessageBuilder2);
+
+                        $result = $bot->replyMessage($event['replyToken'], $multiMessageBuilder);
+
+                        /*$result = $bot->replyText($event['replyToken'], "added to cart");*/
 
                     }else if (strtolower($event['message']['text']) == 'buy cheesecake') {
 
@@ -143,7 +153,15 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                             $sql = "INSERT INTO cart (id, product_name, product_price) Values (1,'cheesecake',35000)";
                             $pdo->exec($sql);
 
-                        $result = $bot->replyText($event['replyToken'], "added to cart");
+                        
+                        $textMessageBuilder1 = new TextMessageBuilder("added to cart");
+                        $textMessageBuilder2 = new TextMessageBuilder('ketik keyword "cart" untuk melihat pemesanan anda');
+
+                        $multiMessageBuilder = new MultiMessageBuilder();
+                        $multiMessageBuilder->add($textMessageBuilder1);
+                        $multiMessageBuilder->add($textMessageBuilder2);
+
+                        $result = $bot->replyMessage($event['replyToken'], $multiMessageBuilder);
 
                     }else if (strtolower($event['message']['text']) == 'buy brownies') {
 
@@ -152,7 +170,15 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                             $sql = "INSERT INTO cart (id, product_name, product_price) Values (1,'brownies',45000)";
                             $pdo->exec($sql);
 
-                        $result = $bot->replyText($event['replyToken'], "added to cart");
+                        
+                        $textMessageBuilder1 = new TextMessageBuilder("added to cart");
+                        $textMessageBuilder2 = new TextMessageBuilder('ketik keyword "cart" untuk melihat pemesanan anda');
+
+                        $multiMessageBuilder = new MultiMessageBuilder();
+                        $multiMessageBuilder->add($textMessageBuilder1);
+                        $multiMessageBuilder->add($textMessageBuilder2);
+
+                        $result = $bot->replyMessage($event['replyToken'], $multiMessageBuilder);
 
                     } else {
              
