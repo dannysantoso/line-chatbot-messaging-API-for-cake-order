@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
+include 'db.php';
  
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -92,12 +93,12 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
 
                     }else if (strtolower($event['message']['text']) == 'buy tiramisu') {
 
+                            /*include ('db.php');*/
+
+                            $sql = "INSERT INTO cart (product_name, product_price) Values ('tiramisu','Rp. 30.000')";
+                            $pdo->exec($sql);
+
                             /*include ('db.php');
-
-                            $sql = "INSERT INTO cart (id, product_name, product_price) Values (1,'tiramisu','Rp. 30.000')";
-                            $pdo->exec($sql);*/
-
-                            include ('db.php');
 
                             $id = 1;
                             $product_name = "tiramisu";
@@ -105,7 +106,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
 
                             $sql = "INSERT INTO cart (id, product_name, product_price) VALUES (?,?,?)";
                             $stmt= $pdo->prepare($sql);
-                            $stmt->execute([$id, $product_name, $product_price]);
+                            $stmt->execute([$id, $product_name, $product_price]);*/
 
                         $result = $bot->replyText($event['replyToken'], "added to cart");
 
