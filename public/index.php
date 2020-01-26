@@ -1,6 +1,6 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
-include('db.php');
+/*include('db.php');*/
  
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -83,7 +83,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
 
                         
 
-                        $sql = 'SELECT product_name, product_price FROM cart';
+                        /*$sql = 'SELECT product_name, product_price FROM cart';
                         $q = $pdo->query($sql);
                         $q->setFetchMode(PDO::FETCH_ASSOC);
                         while ($row = $q->fetch()) {
@@ -91,7 +91,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         }
 
 
-                        $result = $bot->replyText($event['replyToken'], $details);
+                        $result = $bot->replyText($event['replyToken'], $details);*/
 
                     } else if (strtolower($event['message']['text']) == 'buy') {
 
