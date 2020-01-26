@@ -98,9 +98,24 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
 
                         $result = $bot->replyText($event['replyToken'], $details);
 
+                        $textMessageBuilder1 = new TextMessageBuilder($details);
+                        $textMessageBuilder2 = new TextMessageBuilder('ketik keyword "buy" untuk melakukan pembelian, dan "cancel" untuk mengcancel pemesanan');
+
+                        $multiMessageBuilder = new MultiMessageBuilder();
+                        $multiMessageBuilder->add($textMessageBuilder1);
+                        $multiMessageBuilder->add($textMessageBuilder2);
+
+                        $result = $bot->replyMessage($event['replyToken'], $multiMessageBuilder);
+
                     } else if (strtolower($event['message']['text']) == 'buy') {
 
-                        $result = $bot->replyText($event['replyToken'], "ini buy");
+                        include ('db.php');
+
+                        $sql = "DELETE FROM cart WHERE id = 1";
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->execute();
+
+                        $result = $bot->replyText($event['replyToken'], "anda telah melakukan pembayaran silahkan transfer ke no rekening berikut xxxxxxxxxxxxxxxx");
 
                     } else if (strtolower($event['message']['text']) == 'cancel') {
 
@@ -110,7 +125,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         $stmt = $pdo->prepare($sql);
                         $stmt->execute();
 
-                        $result = $bot->replyText($event['replyToken'], "ini cancel");
+                        $result = $bot->replyText($event['replyToken'], "anda telah mencancel pemesanan anda");
 
                     }else if (strtolower($event['message']['text']) == 'buy tiramisu') {
 
@@ -160,9 +175,6 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     $multiMessageBuilder->add($textMessageBuilder2);
 
                     $result = $bot->replyMessage($event['replyToken'], $multiMessageBuilder);
-
-                    $result = $bot->replyMessage($event['replyToken'], 'gagal');
-
 
                     $response->getBody()->write((string) $result->getJSONDecodedBody());
                     return $response
