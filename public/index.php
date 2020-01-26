@@ -80,7 +80,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         ]);
 
                         if (strtolower($event['message']['text']) == 'buy tiramisu') {
-
+/*
                             private $db;
                             $name = "tiramisu";
                             $price = "Rp. 30.000"
@@ -92,7 +92,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                                     'product_name' => $name,
                                     'product_price' => $price
                                 ]);
-    
+    */
 
                             $result = $bot->replyText($event['replyToken'], "added to cart");
 
