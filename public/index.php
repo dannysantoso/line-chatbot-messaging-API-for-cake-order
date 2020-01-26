@@ -11,6 +11,9 @@ use \LINE\LINEBot\MessageBuilder\MultiMessageBuilder;
 use \LINE\LINEBot\MessageBuilder\TextMessageBuilder;
 use \LINE\LINEBot\MessageBuilder\StickerMessageBuilder;
 use \LINE\LINEBot\SignatureValidator as SignatureValidator;
+use \LINE\LINEBot\MessageBuilder\ImageMessageBuilder;
+use \LINE\LINEBot\MessageBuilder\AudioMessageBuilder;
+use \LINE\LINEBot\MessageBuilder\VideoMessageBuilder;
  
 $pass_signature = true;
  
@@ -93,71 +96,60 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                             ],
                         ]);
 
-                        $result = $bot->replyText($event['replyToken'], "added to cart");
+                        if (strtolower($event['message']['text']) == 'buy tiramisu') {
+
+                            $result = $bot->replyText($event['replyToken'], "added to cart");
+
+                        }else if (strtolower($event['message']['text']) == 'buy cheesecake') {
+
+                            $result = $bot->replyText($event['replyToken'], "added to cart");
+
+                        }else if (strtolower($event['message']['text']) == 'buy brownies') {
+
+                            $result = $bot->replyText($event['replyToken'], "added to cart");
+
+                        }
  
+                    } else if (strtolower($event['message']['text']) == 'cart') {
+
+                        $result = $bot->replyText($event['replyToken'], "ini cart");
+
+                    } else if (strtolower($event['message']['text']) == 'buy') {
+
+                        $result = $bot->replyText($event['replyToken'], "ini buy");
+
+                    } else if (strtolower($event['message']['text']) == 'cancel') {
+
+                        $result = $bot->replyText($event['replyToken'], "ini cancel");
+
                     } else {
-                    //balas pesan pakai sticker
-                    /*packageId = 1;
-                    $stickerId = 3;
-                    $stickerMessageBuilder = new StickerMessageBuilder($packageId, $stickerId);
-                    $bot->replyMessage($replyToken, $stickerMessageBuilder);*/
-                    //replySticker(replyToken, 1, 1); cara cepetnya
-
-
-
-                    // send same message as reply to user
+             
                     $result = $bot->replyText($event['replyToken'], "keyword yang anda masukan tidak sesuai, berikut adalah daftar keyword (menu, cart, buy, cancel)");
-                    
+                
+                    }
 
-                    // sent different message as reply to user
-                    /*$textMessageBuilder = new TextMessageBuilder('ini pesan balasan');
-                    $bot->replyMessage($replyToken, $textMessageBuilder);*/
-                    //$bot->replyText($replyToken, 'ini pesan balasan'); cara cepetnya
-     
-     
-                    // or we can use replyMessage() instead to send reply message
-                    // $textMessageBuilder = new TextMessageBuilder($event['message']['text']);
-                    // $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
-
-                    //bales dengan multitext
-                    /*$textMessageBuilder1 = new TextMessageBuilder('ini pesan balasan pertama');
-                    $textMessageBuilder2 = new TextMessageBuilder('ini pesan balasan kedua');
-                    $stickerMessageBuilder = new StickerMessageBuilder(1, 106);
-                     
-                     
-                    $multiMessageBuilder = new MultiMessageBuilder();
-                    $multiMessageBuilder->add($textMessageBuilder1);
-                    $multiMessageBuilder->add($textMessageBuilder2);
-                    $multiMessageBuilder->add($stickerMessageBuilder);
-                     
-                     
-                    $bot->replyMessage($replyToken, $multiMessageBuilder);*/
-
-
-                    //kirim gambar
-                    /*use \LINE\LINEBot\MessageBuilder\ImageMessageBuilder;
- 
-                    $imageMessageBuilder = new ImageMessageBuilder('url gambar asli', 'url gambar preview');
-                    $bot->replyMessage($replyToken, $imageMessageBuilder);*/
-
-                    //kirim audio
-                    /*use \LINE\LINEBot\MessageBuilder\AudioMessageBuilder;
- 
-                    $audioMessageBuilder = new AudioMessageBuilder('url audio asli', 'durasi audio');
-                    $bot->replyMessage($replyToken, $audioMessageBuilder);*/
-
-                    //kirim video
-                    /*use \LINE\LINEBot\MessageBuilder\VideoMessageBuilder;
- 
-                    $videoMessageBuilder = new VideoMessageBuilder('url video asli', 'url gambar preview video');
-                    $bot->replyMessage($replyToken, $videoMessageBuilder);*/
-     
-     
                     $response->getBody()->write($result->getJSONDecodedBody());
                     return $response
                         ->withHeader('Content-Type', 'application/json')
                         ->withStatus($result->getHTTPStatus());
-                    }
+                    
+                }else if( $event['message']['type'] == 'image' or $event['message']['type'] == 'video' or $event['message']['type'] == 'audio' or $event['message']['type'] == 'file'){
+
+                    $textMessageBuilder1 = new TextMessageBuilder('maaf kami tidak menerima format data selain text');
+                    $textMessageBuilder2 = new TextMessageBuilder('berikut adalah daftar keyword (menu, cart, buy, cancel)');
+
+                    $multiMessageBuilder = new MultiMessageBuilder();
+                    $multiMessageBuilder->add($textMessageBuilder1);
+                    $multiMessageBuilder->add($textMessageBuilder2);
+
+                    $bot->replyMessage($replyToken, $multiMessageBuilder);
+
+
+                    $response->getBody()->write((string) $result->getJSONDecodedBody());
+                    return $response
+                        ->withHeader('Content-Type', 'application/json')
+                        ->withStatus($result->getHTTPStatus());
+
                 }
             }
         }
