@@ -88,7 +88,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         $q->setFetchMode(PDO::FETCH_ASSOC);
 
                         while ($r = $q->fetch()){
-                            $details .= $r['product_name'].$r['product_price'];
+                            $details .= "product name = ".$r['product_name']." product price = ".$r['product_price']."\n";
                         }
 
                         $result = $bot->replyText($event['replyToken'], $details);
