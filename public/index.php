@@ -91,7 +91,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
 
                         while ($r = $q->fetch()){
                             $details .= "name = ".$r['product_name'].", price = ".$r['product_price']."\n";
-                            $sum .= $r['product_price'];
+                            $sum .= (int)$r['product_price'];
                         }
 
                         $details .= "total :".$sum;
