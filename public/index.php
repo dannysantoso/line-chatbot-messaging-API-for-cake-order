@@ -80,9 +80,15 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
  
                     } else if (strtolower($event['message']['text']) == 'cart') {
 
-                        $stmt = $pdo->query("SELECT * FROM cart");
+                        $sql = 'SELECT product_name, product_price FROM cart';
+                        $q = $pdo->query($sql);
+                        $q->setFetchMode(PDO::FETCH_ASSOC);
+                        while ($row = $q->fetch()) {
+                            $details = $row['product_name'] + $row['product_price'];
+                        }
 
-                        $result = $bot->replyText($event['replyToken'], $stmt);
+
+                        $result = $bot->replyText($event['replyToken'], $details);
 
                     } else if (strtolower($event['message']['text']) == 'buy') {
 
