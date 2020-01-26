@@ -92,15 +92,10 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
 
                     }else if (strtolower($event['message']['text']) == 'buy tiramisu') {
 
-                        include('db.php');
+                            include('db.php');
 
-                        
-                           
-
-                            $sql = 'INSERT INTO cart (id, product_name, product_price) Values (1,"tiramisu","Rp. 30.000")';
-                              $stmt = $pdo->prepare($sql);
-                              $stmt->execute();
-    
+                            $sql = "INSERT INTO cart (id, product_name, product_price) Values (1,'tiramisu','Rp. 30.000')";
+                            $pdo->exec($sql);
 
                         $result = $bot->replyText($event['replyToken'], "added to cart");
 
