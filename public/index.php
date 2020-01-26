@@ -91,7 +91,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
 
                         while ($r = $q->fetch()){
                             $details .= "name = ".$r['product_name'].", price = ".$r['product_price']."\n";
-                            $sum .= (int)$r['product_price'];
+                            $sum += (int)$r['product_price'];
                         }
 
                         $details .= "total :".$sum;
@@ -103,6 +103,12 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         $result = $bot->replyText($event['replyToken'], "ini buy");
 
                     } else if (strtolower($event['message']['text']) == 'cancel') {
+
+                        include ('db.php');
+
+                        $sql = "DELETE FROM cart WHERE id = 1";
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->execute();
 
                         $result = $bot->replyText($event['replyToken'], "ini cancel");
 
