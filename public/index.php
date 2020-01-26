@@ -80,7 +80,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
  
                     } else if (strtolower($event['message']['text']) == 'cart') {
 
-                        $sql = 'SELECT * FROM cart WHERE = "1"';
+                        $sql = 'SELECT * FROM cart';
                         $stmt = $pdo->prepare($sql);
                         $stmt->execute();
                         $rowCount = $stmt->rowCount();
