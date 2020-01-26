@@ -14,7 +14,6 @@ use \LINE\LINEBot\SignatureValidator as SignatureValidator;
 use \LINE\LINEBot\MessageBuilder\ImageMessageBuilder;
 use \LINE\LINEBot\MessageBuilder\AudioMessageBuilder;
 use \LINE\LINEBot\MessageBuilder\VideoMessageBuilder;
-use Illuminate\Database\ConnectionInterface;
  
 $pass_signature = true;
  
@@ -78,33 +77,6 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                                 ]
                             ],
                         ]);
-
-                        if (strtolower($event['message']['text']) == 'buy tiramisu') {
-/*
-                            private $db;
-                            $name = "tiramisu";
-                            $price = "Rp. 30.000"
- 
-                            $this->db = app('db');
-    
-                            $this->db->table('cart')
-                                ->insert([
-                                    'product_name' => $name,
-                                    'product_price' => $price
-                                ]);
-    */
-
-                            $result = $bot->replyText($event['replyToken'], "added to cart");
-
-                        }else if (strtolower($event['message']['text']) == 'buy cheesecake') {
-
-                            $result = $bot->replyText($event['replyToken'], "added to cart");
-
-                        }else if (strtolower($event['message']['text']) == 'buy brownies') {
-
-                            $result = $bot->replyText($event['replyToken'], "added to cart");
-
-                        }
  
                     } else if (strtolower($event['message']['text']) == 'cart') {
 
@@ -117,6 +89,28 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     } else if (strtolower($event['message']['text']) == 'cancel') {
 
                         $result = $bot->replyText($event['replyToken'], "ini cancel");
+
+                    }else if (strtolower($event['message']['text']) == 'buy tiramisu') {
+
+                        include('db.php');
+
+                        
+                           
+
+                            $sql = 'INSERT INTO cart (id, product_name, product_price) Values (1,"tiramisu","Rp. 30.000")';
+                              $stmt = $pdo->prepare($sql);
+                              $stmt->execute();
+    
+
+                        $result = $bot->replyText($event['replyToken'], "added to cart");
+
+                    }else if (strtolower($event['message']['text']) == 'buy cheesecake') {
+
+                        $result = $bot->replyText($event['replyToken'], "added to cart");
+
+                    }else if (strtolower($event['message']['text']) == 'buy brownies') {
+
+                        $result = $bot->replyText($event['replyToken'], "added to cart");
 
                     } else {
              
