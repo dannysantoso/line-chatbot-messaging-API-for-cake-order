@@ -82,9 +82,13 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         
                         include ('db.php');
 
-                        $stmt = $pdo->query("SELECT product_name, product_price FROM cart");
-                        while ($row = $stmt->fetch()) {
-                            $details = $row['product_name'].$row['product_price'];
+                        $sql = 'SELECT product_name, product_price from cart';
+                         
+                        $q = $pdo->query($sql);
+                        $q->setFetchMode(PDO::FETCH_ASSOC);
+
+                        while ($r = $q->fetch()){
+                            $details += $r['product_name'].$r['product_price'];
                         }
 
                         $result = $bot->replyText($event['replyToken'], $details);
