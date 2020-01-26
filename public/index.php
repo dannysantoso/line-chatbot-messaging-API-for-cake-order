@@ -1,6 +1,5 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
-/*include('db.php');*/
  
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -81,17 +80,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
  
                     } else if (strtolower($event['message']['text']) == 'cart') {
 
-                        
-
-                        /*$sql = 'SELECT product_name, product_price FROM cart';
-                        $q = $pdo->query($sql);
-                        $q->setFetchMode(PDO::FETCH_ASSOC);
-                        while ($row = $q->fetch()) {
-                            $details = $row['product_name'] + $row['product_price'];
-                        }
-
-
-                        $result = $bot->replyText($event['replyToken'], $details);*/
+                        $result = $bot->replyText($event['replyToken'], "ini cart");
 
                     } else if (strtolower($event['message']['text']) == 'buy') {
 
@@ -112,19 +101,9 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
 
                     }else if (strtolower($event['message']['text']) == 'buy cheesecake') {
 
-                            include('db.php');
-
-                            $sql = "INSERT INTO cart (id, product_name, product_price) Values (1,'cheesecake','Rp. 35.000')";
-                            $pdo->exec($sql);
-
                         $result = $bot->replyText($event['replyToken'], "added to cart");
 
                     }else if (strtolower($event['message']['text']) == 'buy brownies') {
-
-                            include('db.php');
-
-                            $sql = "INSERT INTO cart (id, product_name, product_price) Values (1,'tiramisu','Rp. 45.000')";
-                            $pdo->exec($sql);
 
                         $result = $bot->replyText($event['replyToken'], "added to cart");
 
