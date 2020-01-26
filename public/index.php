@@ -142,9 +142,9 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     $multiMessageBuilder->add($textMessageBuilder1);
                     $multiMessageBuilder->add($textMessageBuilder2);
 
-                    $bot->replyMessage($replyToken, $multiMessageBuilder);
+                    $result = $bot->replyMessage($event['replyToken'], $multiMessageBuilder);
 
-                    $bot->replyMessage($replyToken, 'gagal');
+                    $result = $bot->replyMessage($event['replyToken'], 'gagal');
 
 
                     $response->getBody()->write((string) $result->getJSONDecodedBody());
