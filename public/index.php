@@ -133,7 +133,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         ->withHeader('Content-Type', 'application/json')
                         ->withStatus($result->getHTTPStatus());
                     
-                }else if( $event['message']['type'] == 'image' or $event['message']['type'] == 'video' or $event['message']['type'] == 'audio' or $event['message']['type'] == 'file'){
+                }else if($event['message']['type'] == 'image'){
 
                     $textMessageBuilder1 = new TextMessageBuilder('maaf kami tidak menerima format data selain text');
                     $textMessageBuilder2 = new TextMessageBuilder('berikut adalah daftar keyword (menu, cart, buy, cancel)');
@@ -143,6 +143,8 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     $multiMessageBuilder->add($textMessageBuilder2);
 
                     $bot->replyMessage($replyToken, $multiMessageBuilder);
+
+                    $bot->replyMessage($replyToken, 'gagal');
 
 
                     $response->getBody()->write((string) $result->getJSONDecodedBody());
