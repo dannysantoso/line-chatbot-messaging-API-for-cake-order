@@ -1,6 +1,5 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
-include 'db.php';
  
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -93,7 +92,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
 
                     }else if (strtolower($event['message']['text']) == 'buy tiramisu') {
 
-                            /*include ('db.php');*/
+                            include ('db.php');
 
                             $sql = "INSERT INTO cart (product_name, product_price) Values ('tiramisu','Rp. 30.000')";
                             $pdo->exec($sql);
