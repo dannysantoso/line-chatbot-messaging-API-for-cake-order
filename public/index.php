@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
+include('db.php');
  
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -79,6 +80,8 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         ]);
  
                     } else if (strtolower($event['message']['text']) == 'cart') {
+
+                        
 
                         $sql = 'SELECT product_name, product_price FROM cart';
                         $q = $pdo->query($sql);
