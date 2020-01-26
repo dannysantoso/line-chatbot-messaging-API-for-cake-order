@@ -93,7 +93,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                             ],
                         ]);
 
-                        $result = $bot->replyText($event['replyToken'], data);
+                        $result = $bot->replyText($event['replyToken'], "added to cart");
  
                     } else {
                     //balas pesan pakai sticker

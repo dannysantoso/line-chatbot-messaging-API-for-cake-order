@@ -49,10 +49,9 @@
           {
             "type": "button",
             "action": {
-              "type": "postback",
+              "type": "message",
               "label": "BUY",
-              "data": "BUY01",
-              "displayText": "BUY01"
+              "text": "buy tiramisu"
             },
             "style": "primary",
             "gravity": "center",
@@ -110,10 +109,9 @@
           {
             "type": "button",
             "action": {
-              "type": "postback",
+              "type": "message",
               "label": "BUY",
-              "data": "BUY02",
-              "displayText": "BUY02"
+              "text": "buy cheesecake"
             },
             "style": "primary",
             "gravity": "center",
@@ -171,10 +169,9 @@
           {
             "type": "button",
             "action": {
-              "type": "postback",
+              "type": "message",
               "label": "BUY",
-              "data": "BUY03",
-              "displayText": "BUY03"
+              "text": "buy brownies"
             },
             "style": "primary",
             "gravity": "center",
