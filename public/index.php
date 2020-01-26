@@ -14,6 +14,7 @@ use \LINE\LINEBot\SignatureValidator as SignatureValidator;
 use \LINE\LINEBot\MessageBuilder\ImageMessageBuilder;
 use \LINE\LINEBot\MessageBuilder\AudioMessageBuilder;
 use \LINE\LINEBot\MessageBuilder\VideoMessageBuilder;
+use Illuminate\Database\ConnectionInterface;
  
 $pass_signature = true;
  
@@ -33,24 +34,6 @@ $app->get('/', function (Request $request, Response $response, $args) {
     return $response;
 });
 
-//for push message
-$app->get('/pushmessage', function ($req, $response) use ($bot) {
-    // send push message to user
-    $userId = 'U72c3603ae0f3ab5ab6e814bdeb0dee67'; //ganti dengan user id
-    $textMessageBuilder = new TextMessageBuilder('Halo, ini pesan push');
-    $result = $bot->pushMessage($userId, $textMessageBuilder);
- 
-    $response->getBody()->write((string) $result->getJSONDecodedBody());
-    return $response
-        ->withHeader('Content-Type', 'application/json')
-        ->withStatus($result->getHTTPStatus());
-});
-
-// kalo mau pake sticker ngepush message
-/*$userId = 'Isi dengan user ID Anda';
-$stickerMessageBuilder = new StickerMessageBuilder(1, 106);
-$bot->pushMessage($userId, $stickerMessageBuilder);*/
- 
 // buat route untuk webhook
 $app->post('/webhook', function (Request $request, Response $response) use ($channel_secret, $bot, $httpClient, $pass_signature) {
     // get request body and line signature header
@@ -72,7 +55,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
         }
     }
     
-// kode aplikasi nanti disini
+
 
     $data = json_decode($body, true);
     if(is_array($data['events'])){
@@ -97,6 +80,19 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         ]);
 
                         if (strtolower($event['message']['text']) == 'buy tiramisu') {
+
+                            private $db;
+                            $name = "tiramisu";
+                            $price = "Rp. 30.000"
+ 
+                            $this->db = app('db');
+    
+                            $this->db->table('cart')
+                                ->insert([
+                                    'product_name' => $name,
+                                    'product_price' => $price
+                                ]);
+    
 
                             $result = $bot->replyText($event['replyToken'], "added to cart");
 
@@ -124,7 +120,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
 
                     } else {
              
-                    $result = $bot->replyText($event['replyToken'], "keyword yang anda masukan tidak sesuai, berikut adalah daftar keyword (menu, cart, buy, cancel)");
+                    $result = $bot->replyText($event['replyToken'], "keyword yang anda masukan tidak sesuai, berikut adalah daftar keyword (menu, cart, cancel)");
                 
                     }
 
@@ -136,7 +132,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                 }else if($event['message']['type'] == 'image' or $event['message']['type'] == 'video' or $event['message']['type'] == 'audio' or $event['message']['type'] == 'file'){
 
                     $textMessageBuilder1 = new TextMessageBuilder('maaf kami tidak menerima format data selain text');
-                    $textMessageBuilder2 = new TextMessageBuilder('berikut adalah daftar keyword (menu, cart, buy, cancel)');
+                    $textMessageBuilder2 = new TextMessageBuilder('berikut adalah daftar keyword (menu, cart, cancel)');
 
                     $multiMessageBuilder = new MultiMessageBuilder();
                     $multiMessageBuilder->add($textMessageBuilder1);
