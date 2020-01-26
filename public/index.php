@@ -80,7 +80,13 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
  
                     } else if (strtolower($event['message']['text']) == 'cart') {
 
-                        $result = $bot->replyText($event['replyToken'], "ini cart");
+                        $sql = 'SELECT * FROM cart WHERE = "1"';
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->execute();
+                        $rowCount = $stmt->rowCount();
+                        $details = $stmt->fetch();
+
+                        $result = $bot->replyText($event['replyToken'], $details);
 
                     } else if (strtolower($event['message']['text']) == 'buy') {
 
@@ -101,9 +107,19 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
 
                     }else if (strtolower($event['message']['text']) == 'buy cheesecake') {
 
+                            include('db.php');
+
+                            $sql = "INSERT INTO cart (id, product_name, product_price) Values (1,'cheesecake','Rp. 35.000')";
+                            $pdo->exec($sql);
+
                         $result = $bot->replyText($event['replyToken'], "added to cart");
 
                     }else if (strtolower($event['message']['text']) == 'buy brownies') {
+
+                            include('db.php');
+
+                            $sql = "INSERT INTO cart (id, product_name, product_price) Values (1,'tiramisu','Rp. 45.000')";
+                            $pdo->exec($sql);
 
                         $result = $bot->replyText($event['replyToken'], "added to cart");
 
