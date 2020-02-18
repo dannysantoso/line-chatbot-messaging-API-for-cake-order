@@ -18,8 +18,8 @@ use \LINE\LINEBot\MessageBuilder\VideoMessageBuilder;
 $pass_signature = true;
  
 // set LINE channel_access_token and channel_secret
-$channel_access_token = "feKHIGbWLPTrDwVOs78WnYLd8++OvHvatC+67VAKZUExtDMBPArvxwO3c4LLHOwX4M7zd2twX0jS/lbGelJNSX6ZFbfsQsVS8FAlX5Q1T6uRfxnF5nJ1rbymm/pPLdbvw/Zm9Au+NjXQ2JbLHZ3bBQdB04t89/1O/w1cDnyilFU=";
-$channel_secret = "7653ca3585b6f4cae2ec5315e0ceed1c";
+$channel_access_token = ""; //input your channel access token that was get from Line developer > messaging API
+$channel_secret = ""; //input your channel secret that was get from Line developer > basic settings
  
 // inisiasi objek bot
 $httpClient = new CurlHTTPClient($channel_access_token);
